@@ -1,8 +1,9 @@
 <script setup>
-import { reactive, defineProps, computed, onMounted } from 'vue'
+import { reactive, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter, useRoute } from 'vue-router'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import { useToast } from 'vue-toastification'
 
 const props = defineProps({
   totalPages: {
@@ -23,6 +24,7 @@ const currentPage = reactive({
 
 const route = useRoute()
 const router = useRouter()
+const toast = useToast()
 
 const fetchService = async (page) => {
   if (page < 1 || page > props.totalPages) return
@@ -75,6 +77,7 @@ onMounted(() => {
 const logout = () => {
   localStorage.removeItem('accessToken')
   router.push('/')
+  toast.success('Logout efetuado com sucesso.')
 }
 </script>
 
