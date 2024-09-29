@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, computed, onMounted } from 'vue'
 import axios from 'axios'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute, RouterLink } from 'vue-router'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import { useToast } from 'vue-toastification'
 
@@ -131,9 +131,13 @@ const logout = () => {
         <nav aria-label="Navegar pelas páginas">
           <ul class="pagination justify-content-center">
             <li class="page-item" :class="{ disabled: currentPage.pageNum === 1 }">
-              <a class="page-link" href="#" @click.prevent="changePage(currentPage.pageNum - 1)">
+              <RouterLink
+                class="page-link"
+                to="#"
+                @click.prevent="changePage(currentPage.pageNum - 1)"
+              >
                 Anterior
-              </a>
+              </RouterLink>
             </li>
             <li
               v-for="page in props.totalPages"
@@ -144,9 +148,13 @@ const logout = () => {
               <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
             </li>
             <li class="page-item" :class="{ disabled: currentPage.value === props.totalPages }">
-              <a class="page-link" href="#" @click.prevent="changePage(currentPage.pageNum + 1)">
+              <RouterLink
+                class="page-link"
+                to="#"
+                @click.prevent="changePage(currentPage.pageNum + 1)"
+              >
                 Próximo
-              </a>
+              </RouterLink>
             </li>
           </ul>
         </nav>
