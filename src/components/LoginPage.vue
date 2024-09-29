@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
-const info = reactive({
+const userInfo = reactive({
   name: '',
   password: ''
 })
@@ -14,14 +14,14 @@ const router = useRouter()
 const toast = useToast()
 
 const handleLogin = async () => {
-  if (info.password.length < 4 || info.name.length < 4) {
+  if (userInfo.password.length < 4 || userInfo.name.length < 4) {
     toast.error('Nome e Senha devem ter mais de 4 digitos.')
     return
   }
   try {
     const response = await axios.post('http://localhost:8000/login', {
-      name: info.name,
-      password: info.password
+      name: userInfo.name,
+      password: userInfo.password
     })
     const token = response.data.accessToken
     localStorage.setItem('accessToken', token)
@@ -45,7 +45,7 @@ const handleLogin = async () => {
             <label for="name" class="form-label">Nome</label>
             <input
               type="text"
-              v-model="info.name"
+              v-model="userInfo.name"
               class="form-control"
               id="name"
               placeholder="Digite seu nome"
@@ -56,7 +56,7 @@ const handleLogin = async () => {
             <label for="password" class="form-label">Senha</label>
             <input
               type="password"
-              v-model="info.password"
+              v-model="userInfo.password"
               class="form-control"
               id="password"
               placeholder="Digite sua senha"

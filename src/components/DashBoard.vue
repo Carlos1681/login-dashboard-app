@@ -39,7 +39,6 @@ const fetchService = async (page) => {
     })
     const pageNumber = `page${page}`
     tableData.serviceData = response.data[pageNumber]
-    console.log(tableData.serviceData)
   } catch (error) {
     console.error('Erro ao obter dados de serviços:', error)
   } finally {
@@ -94,7 +93,7 @@ const logout = () => {
           />
 
           <select v-model="tableData.statusFilter" class="form-select w-50">
-            <option value="">Todos</option>
+            <option value="">Todos os Status</option>
             <option value="in progress">Em Andamento</option>
             <option value="Concluded">Concluído</option>
           </select>
